@@ -86,9 +86,11 @@ def guess_type_from_argname(name: str) -> Tuple[Optional[str], List[str]]:
             if elems in names or (elems[-1] == "s" and elems[:-1] in names):
                 return name_type, [m.group("container").capitalize()]
 
-    # Names which imply the value is a boolean
+    # Boolean indicators
     if name.startswith("is_") or name in BOOL_NAMES:
-        return "bool", []
+       return maybe_optional("bool"), []
+    
+    #integer indicators
 
     if (
         name.endswith("_size")
